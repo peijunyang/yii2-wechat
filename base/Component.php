@@ -2,6 +2,7 @@
 namespace cliff363825\wechat\base;
 
 use Yii;
+use yii\base\InvalidParamException;
 
 /**
  * Class Component
@@ -38,16 +39,25 @@ class Component extends \yii\base\Component
     public function init()
     {
         parent::init();
+        $this->classMap();
+    }
+
+    /**
+     * 映射类库
+     */
+    public function classMap()
+    {
         switch ($this->type) {
             case 'qy':
                 Yii::$classMap['Wechat'] = '@cliff363825/wechat/sdk/qywechat.class.php';
                 Yii::$classMap['ErrCode'] = '@cliff363825/wechat/sdk/qyerrCode.php';
                 break;
             case 'common':
-            default:
                 Yii::$classMap['Wechat'] = '@cliff363825/wechat/sdk/wechat.class.php';
                 Yii::$classMap['ErrCode'] = '@cliff363825/wechat/sdk/errCode.php';
                 break;
+            default:
+                throw new InvalidParamException('Unknown wechat type.');
         }
     }
 
