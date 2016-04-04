@@ -1,5 +1,5 @@
 <?php
-namespace cliff363825\wechat\base;
+namespace peijunyang\wechat\base;
 
 use Yii;
 

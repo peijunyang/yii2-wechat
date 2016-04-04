@@ -1,22 +1,22 @@
 {
-    "name": "cliff363825/yii2-wechat",
+    "name": "peijunyang/yii2-wechat",
     "description": "Wechat Component  For Yii2",
     "type": "yii2-extension",
     "keywords": ["yii2","wechat"],
     "license": "MIT",
     "authors": [
         {
-            "name": "cliff363825",
-            "email": "cliff_363825@163.com"
+            "name": "peijunyang",
+            "email": "469907425@qq.com"
         }
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "dodgepudding/wechat-php-sdk": "*"
+        "peijunyang/wechat-php-sdk": "*"
     },
     "autoload": {
         "psr-4": {
-            "cliff363825\\wechat\\": ""
+            "peijunyang\\wechat\\": ""
         }
     }
 }

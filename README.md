@@ -2,7 +2,7 @@ Wechat Component For Yii2
 =========================
 Wechat Component  For Yii2
 
-This extension is base on [wechat-php-sdk](https://github.com/dodgepudding/wechat-php-sdk) and used for Yii2.
+This extension is base on [wechat-php-sdk](https://github.com/peijunyang/wechat-php-sdk) and used for Yii2.
 
 Installation
 ------------
@@ -12,13 +12,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist cliff363825/yii2-wechat "*"
+php composer.phar require --prefer-dist peijunyang/yii2-wechat "*"
 ```
 
 or add
 
 ```
-"cliff363825/yii2-wechat": "*"
+"peijunyang/yii2-wechat": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -35,7 +35,7 @@ return [
     'components' => [
         ....
         'wechat' => [
-            'class' => 'cliff363825\wechat\Component',
+            'class' => 'peijunyang\wechat\Component',
             'config' => [
                 'type'=>'common', // 微信账号类型, common 普通, qy 企业
                 'token'=>'tokenaccesskey', //填写你设定的key
@@ -55,4 +55,4 @@ $weObj = Yii::$app->wechat->getWechat(); //获取wechat对象实例
  //TODO：调用$weObj各实例方法
 ```
 
-For full details on usage, see the [documentation](https://github.com/dodgepudding/wechat-php-sdk).
+For full details on usage, see the [documentation](https://github.com/peijunyang/wechat-php-sdk).
