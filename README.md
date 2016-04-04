@@ -55,4 +55,4 @@ $weObj = Yii::$app->wechat->getWechat(); //获取wechat对象实例
  //TODO：调用$weObj各实例方法
 ```
 
-For full details on usage, see the [documentation](https://github.com/peijunyang/wechat-php-sdk).
+For full details on usage, see the [api wiki](https://github.com/peijunyang/yii2-wechat/tree/master/wiki).
