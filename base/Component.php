@@ -49,12 +49,12 @@ class Component extends \yii\base\Component
     {
         switch ($this->type) {
             case 'qy':
-                Yii::$classMap['Wechat'] = '@vendor/peijunyang/wechat-php-sdk/qywechat.class.php';
-                Yii::$classMap['ErrCode'] = '@vendor/peijunyang/wechat-php-sdk/qyerrCode.php';
+                Yii::$classMap['Wechat'] = realpath(__DIR__ . '/../sdk/qywechat.class.php');
+                Yii::$classMap['ErrCode'] = realpath(__DIR__ . '/../sdk/qyerrCode.php');
                 break;
             case 'common':
-                Yii::$classMap['Wechat'] = '@vendor/peijunyang/wechat-php-sdk/wechat.class.php';
-                Yii::$classMap['ErrCode'] = '@vendor/peijunyang/wechat-php-sdk/errCode.php';
+                Yii::$classMap['Wechat'] = realpath(__DIR__ . '/../sdk/wechat.class.php');
+                Yii::$classMap['ErrCode'] = realpath(__DIR__ . '/../sdk/errCode.php');
                 break;
             default:
                 throw new InvalidParamException('Unknown wechat type.');
