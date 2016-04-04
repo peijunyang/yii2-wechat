@@ -1,5 +1,7 @@
 <?php
 
+namespace peijunyang\wechat\sdk;
+
 /**
  *    微信公众平台PHP-SDK, 全局返回码类
  * @author  binsee <binsee@163.com>
