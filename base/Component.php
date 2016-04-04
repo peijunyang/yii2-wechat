@@ -39,6 +39,7 @@ class Component extends \yii\base\Component
     public function init()
     {
         parent::init();
+        $this->type = $this->config["type"];
         $this->classMap();
     }
 
