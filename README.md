@@ -2,8 +2,6 @@ Wechat Component For Yii2
 =========================
 Wechat Component  For Yii2
 
-This extension is base on [wechat-php-sdk](https://github.com/peijunyang/wechat-php-sdk) and used for Yii2.
-
 Installation
 ------------
 
