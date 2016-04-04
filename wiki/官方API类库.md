@@ -27,17 +27,31 @@
 > 认证权限：分为订阅号、服务号认证，如前缀服务号则仅认证的服务号有此权限，否则为认证后的订阅号、服务号都有此权限  
 > 支付权限：仅认证后的服务号可以申请此权限  
 
-
-## 初始化动作 
+## 官方Wechat调用示例：
 ```php
- $options = array(
-	'token'=>'tokenaccesskey', //填写你设定的key
-	'encodingaeskey'=>'encodingaeskey', //填写加密用的EncodingAESKey
-	'appid'=>'wxdk1234567890', //填写高级调用功能的app id, 请在微信开发模式后台查询
-	'appsecret'=>'xxxxxxxxxxxxxxxxxxx' //填写高级调用功能的密钥
-	);
- $weObj = new Wechat($options); //创建实例对象
- //TODO：调用$weObj各实例方法
+include "wechat.class.php";
+$options = array(
+        'token'=>'tokenaccesskey' //填写你设定的key
+    );
+$weObj = new Wechat($options);
+
+//or component in Yii2
+$weObj = Yii::$app->wechat->getWechat();
+
+$weObj->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
+$type = $weObj->getRev()->getRevType();
+switch($type) {
+    case Wechat::MSGTYPE_TEXT:
+        $weObj->text("hello, I'm wechat")->reply();
+        exit;
+        break;
+    case Wechat::MSGTYPE_EVENT:
+        break;
+    case Wechat::MSGTYPE_IMAGE:
+        break;
+    default:
+        $weObj->text("help info")->reply();
+}
 ```
 
 ### 被动接口方法:   
@@ -218,29 +232,3 @@ const EVENT_CARD_USER_DEL = 'user_del_card';        //卡券 - 用户删除卡�
  *  updateMemberCard($data) 会员卡交易，参数结构请参看卡券开发文档(6.1.2 会员卡交易)章节
  *  updateLuckyMoney($code,$balance,$card_id='') 更新红包金额
  *  setCardTestWhiteList($openid=array(),$user=array()) 设置卡券测试白名单
-
-
-
-## 官方Wechat调用示例：
-```php
-//test1.php
-include "wechat.class.php";
-$options = array(
-		'token'=>'tokenaccesskey' //填写你设定的key
-	);
-$weObj = new Wechat($options);
-$weObj->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
-$type = $weObj->getRev()->getRevType();
-switch($type) {
-	case Wechat::MSGTYPE_TEXT:
-			$weObj->text("hello, I'm wechat")->reply();
-			exit;
-			break;
-	case Wechat::MSGTYPE_EVENT:
-			break;
-	case Wechat::MSGTYPE_IMAGE:
-			break;
-	default:
-			$weObj->text("help info")->reply();
-}
-```

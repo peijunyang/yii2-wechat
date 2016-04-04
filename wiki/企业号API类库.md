@@ -16,21 +16,34 @@
 - 获取企业微信服务器IP列表
 - 微信JSAPI授权(获取ticket、获取签名)
 
-
-## 初始化动作 
+## 企业号API类库调用示例：
+-------- 
 ```php
+include "wechat.class.php";
 $options = array(
-  'token'=>'tokenaccesskey', //填写应用接口的Token
-  'encodingaeskey'=>'encodingaeskey', //填写加密用的EncodingAESKey
-  'appid'=>'wxdk1234567890', //填写高级调用功能的app id
-  'appsecret'=>'xxxxxxxxxxxxxxxxxxx', //填写高级调用功能的密钥
-  'agentid'=>'1', //应用的id
-  'debug'=>false, //调试开关
-  '_logcallback'=>'logg', //调试输出方法，需要有一个string类型的参数
+        'token'=>'9Ixxxxxxx',	//填写应用接口的Token
+        'encodingaeskey'=>'d4o9WVg8sxxxxxxxxxxxxxxxxxxxxxx',//填写加密用的EncodingAESKey
+        'appid'=>'wxa07979baxxxxxxxx',	//填写高级调用功能的appid
 );
- $weObj = new Wechat($options); //创建实例对象
- //TODO：调用$weObj各实例方法
+$weObj = new Wechat($options);
 
+//or component in Yii2
+$weObj = Yii::$app->qyWechat->getWechat();
+
+$weObj->valid(); //注意, 企业号与普通公众号不同，必须打开验证，不要注释掉
+$type = $weObj->getRev()->getRevType();
+switch($type) {
+    case Wechat::MSGTYPE_TEXT:
+        $weObj->text("hello, I'm wechat")->reply();
+        exit;
+        break;
+    case Wechat::MSGTYPE_EVENT:
+        break;
+    case Wechat::MSGTYPE_IMAGE:
+        break;
+    default:
+        $weObj->text("help info")->reply();
+}
 ```
 
 ## 被动接口方法:   
@@ -134,34 +147,3 @@ $options = array(
 * authSucc($userid) 二次验证，参数： 员工UserID
 * getOauthRedirect($callback,$state='STATE',$scope='snsapi_base') 组合授权跳转接口url
 
-
-
-
-
-
-## 企业号API类库调用示例：
--------- 
-可参考**test**目录下的**qydemo.php**
-```php
-include "wechat.class.php";
-$options = array(
-        'token'=>'9Ixxxxxxx',	//填写应用接口的Token
-        'encodingaeskey'=>'d4o9WVg8sxxxxxxxxxxxxxxxxxxxxxx',//填写加密用的EncodingAESKey
-        'appid'=>'wxa07979baxxxxxxxx',	//填写高级调用功能的appid
-);
-$weObj = new Wechat($options);
-$weObj->valid(); //注意, 企业号与普通公众号不同，必须打开验证，不要注释掉
-$type = $weObj->getRev()->getRevType();
-switch($type) {
-	case Wechat::MSGTYPE_TEXT:
-			$weObj->text("hello, I'm wechat")->reply();
-			exit;
-			break;
-	case Wechat::MSGTYPE_EVENT:
-			break;
-	case Wechat::MSGTYPE_IMAGE:
-			break;
-	default:
-			$weObj->text("help info")->reply();
-}
-```
