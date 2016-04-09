@@ -1693,7 +1693,7 @@ class Wechat
         $result = $this->http_get(self::API_URL_PREFIX . self::USER_GETINFO_URL . 'access_token=' . $this->access_token . '&code=' . $code . '&agentid' . $agentid);
         if ($result) {
             $json = json_decode($result, true);
-            if (!$json || !empty($json['errcode']) || $json['errcode'] != 0) {
+            if (!$json || isset($json['errcode'])) {
                 $this->errCode = $json['errcode'];
                 $this->errMsg = $json['errmsg'];
                 return false;
