@@ -87,6 +87,7 @@ class Wechat
     private $appid;         //也就是企业号的CorpID
     private $appsecret;
     private $access_token;
+    private $jsapi_ticket;
     private $agentid;       //应用id   AgentID
     private $postxml;
     private $agentidxml;    //接收的应用id   AgentID
@@ -1019,9 +1020,15 @@ class Wechat
      * @param string $appid 用于多个appid时使用,可空
      * @return array|bool 返回签名字串
      */
-    public function getJsSign($url, $timestamp = 0, $noncestr = '', $appid = '')
+    public function getJsSign($url = '', $timestamp = 0, $noncestr = '', $appid = '')
     {
-        if (!$this->jsapi_ticket && !$this->getJsTicket($appid) || !$url) return false;
+        if (!$this->jsapi_ticket && !$this->getJsTicket($appid)) return false;
+
+        if (!$url) {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        }
+
         if (!$timestamp)
             $timestamp = time();
         if (!$noncestr)
