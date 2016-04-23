@@ -1242,7 +1242,7 @@ class Wechat
     /**
      * 根据媒体文件ID获取媒体文件
      * @param string $media_id 媒体文件id
-     * @return raw data
+     * @return array data
      */
     public function getMedia($media_id)
     {
@@ -1255,7 +1255,10 @@ class Wechat
                 $this->errMsg = $json['errmsg'];
                 return false;
             }
-            return $result;
+            return [
+                "type" => "jpeg",
+                "content" => $result,
+            ];
         }
         return false;
     }
